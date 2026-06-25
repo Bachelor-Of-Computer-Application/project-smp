@@ -45,7 +45,8 @@ int main() {
                 printf("Enter choice: ");
                 if (scanf("%d", &adminChoice) != 1) adminChoice = -1;
                 while(getchar() != '\n');
-if (adminChoice == 1) {
+
+                if (adminChoice == 1) {
                     isInitialized = 1;
                     printf("\n[SYSTEM] Voting session initialized for %d registered users.\n", totalVoters);
                 } 
@@ -102,4 +103,54 @@ if (adminChoice == 1) {
             scanf("%29s", inputPass);
             while(getchar() != '\n'); 
 
+          
+            for (j = 0; j < totalVoters; j++) {
+                if (strcmp(inputUser, voterUsers[j]) == 0 && strcmp(inputPass, voterPasses[j]) == 0) {
+                    userIndex = j;
+                    break;
+                }
+            }
+            if (userIndex == -1) {
+                printf("[ERROR] Invalid voter ID or password.\n");
+                continue;
+            }
+            if (voterHasVoted[userIndex] == 1) {
+                printf("[ACCESS DENIED] Security Alert: User '%s' has already casted a ballot!\n", voterUsers[userIndex]);
+                continue;
+            }
+            printf("\n========================================\n");
+            printf(" WELCOME, %s! SECURE BALLOT SCREEN\n", voterUsers[userIndex]);
+            printf("========================================\n");
+            printf("1. Candidate A\n");
+            printf("2. Candidate B\n");
+            printf("3. Candidate C\n");
+            printf("4. Candidate D\n");
+            printf("----------------------------------------\n");
+            printf("Enter your choice (1-4): ");
+            
+            if (scanf("%d", &ballotChoice) != 1) {
+                ballotChoice = -1; 
+            }
+            while(getchar() != '\n'); 
 
+            switch(ballotChoice) {
+                case 1: votes1++; break;
+                case 2: votes2++; break;
+                case 3: votes3++; break;
+                case 4: votes4++; break;
+                default: spoiltVotes++; break;
+            }
+            voterHasVoted[userIndex] = 1; 
+            successfullyVoted++;
+            printf("\n[SUCCESS] Your vote has been securely encrypted and recorded!\n");
+        }
+        else if (mainChoice == 3) {
+            printf("\nShutting down terminal. Goodbye!\n");
+            break;
+        } 
+        else {
+            printf("\n[ERROR] Invalid portal choice selected.\n");
+        }
+    }
+    return 0;
+}

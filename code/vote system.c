@@ -480,23 +480,15 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-
 int main() {
-
     char adminUser[] = "admin";
     char adminPass[] = "pp";
-    
-   
     char voterUsers[3][30] = {"user1", "user2", "user3"};
     char voterPasses[3][30] = {"voter123", "voter456", "voter789"};
     int voterHasVoted[3] = {0, 0, 0}; 
-    
-
     char inputUser[30];
     char inputPass[30];
     int mainChoice;
-    
-
     int ballotChoice;
     int votes1 = 0, votes2 = 0, votes3 = 0, votes4 = 0;
     int spoiltVotes = 0;
@@ -504,11 +496,7 @@ int main() {
     int successfullyVoted = 0;
     int userIndex;
     int j; 
-
-
     int isInitialized = 0;
-
-  
     while (1) {
         printf("\n=======================================================\n");
         printf("          WELCOME TO THE DIGITAL VOTING SYSTEM          \n");
@@ -517,13 +505,10 @@ int main() {
         printf("2. Voter \n");
         printf("3. Exit Terminal\n");
         printf("Enter your choice: ");
-        
         if (scanf("%d", &mainChoice) != 1) {
             mainChoice = -1;
         }
         while(getchar() != '\n'); 
-
-        
         if (mainChoice == 1) {
             printf("\n===== [ADMIN LOGIN] =====\n");
             printf("Enter Admin Username: ");
@@ -531,11 +516,8 @@ int main() {
             printf("Enter Admin Password: ");
             scanf("%29s", inputPass);
             while(getchar() != '\n'); 
-
             if (strcmp(inputUser, adminUser) == 0 && strcmp(inputPass, adminPass) == 0) {
                 printf("\n[SUCCESS] Access Granted. Welcome, Admin.\n");
-                
-            
                 int adminChoice;
                 printf("\n--- Admin Controls ---\n");
                 printf("1. Initialize/Reset Election Session\n");
@@ -553,8 +535,6 @@ int main() {
                         printf("[WARNING] System not initialized yet. No results available.\n");
                         continue;
                     }
-                    
-                   
                     printf("\n===== Final Voting Results =====\n");
                     printf("Candidate A = %d votes\n", votes1);
                     printf("Candidate B = %d votes\n", votes2);
@@ -585,8 +565,6 @@ int main() {
                 printf("[ERROR] Invalid Admin credentials access denied.\n");
             }
         }
-        
-  
         else if (mainChoice == 2) {
             if (!isInitialized) {
                 printf("\n[ACCESS DENIED] The election session has not been initialized by the Admin yet.\n");
@@ -597,7 +575,6 @@ int main() {
                 printf("\n[NOTICE] All registered voters have already voted. Terminal is locked.\n");
                 continue;
             }
-
             userIndex = -1;
             printf("\n===== [VOTER INTERFACE LOGIN] =====\n");
             printf("Enter Your Voter ID: ");
@@ -613,19 +590,14 @@ int main() {
                     break;
                 }
             }
-
             if (userIndex == -1) {
                 printf("[ERROR] Invalid voter ID or password.\n");
                 continue;
             }
-
-       
             if (voterHasVoted[userIndex] == 1) {
                 printf("[ACCESS DENIED] Security Alert: User '%s' has already casted a ballot!\n", voterUsers[userIndex]);
                 continue;
             }
-
-         
             printf("\n========================================\n");
             printf(" WELCOME, %s! SECURE BALLOT SCREEN\n", voterUsers[userIndex]);
             printf("========================================\n");
@@ -648,22 +620,17 @@ int main() {
                 case 4: votes4++; break;
                 default: spoiltVotes++; break;
             }
-
             voterHasVoted[userIndex] = 1; 
             successfullyVoted++;
             printf("\n[SUCCESS] Your vote has been securely encrypted and recorded!\n");
         }
-        
-   
         else if (mainChoice == 3) {
             printf("\nShutting down terminal. Goodbye!\n");
             break;
         } 
-        
         else {
             printf("\n[ERROR] Invalid portal choice selected.\n");
         }
     }
-
     return 0;
 }
