@@ -1,0 +1,11 @@
+========================================
+         OFFICIAL ELECTION RESULTS       
+========================================
+Candidate A  : 2 votes
+Candidate B  : 1 votes
+Candidate C  : 0 votes
+Candidate D  : 0 votes
+Spoilt Votes : 0
+----------------------------------------
+ELECTION STATUS: Candidate A is the winner.
+========================================

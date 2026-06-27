@@ -1,0 +1,1 @@
+Voter: user1           | Voted For: Candidate A
