@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 void clearScreen() {
     #ifdef _WIN32
         system("cls");
@@ -23,8 +24,7 @@ void writeResultsToFile(int v1, int v2, int v3, int v4, int spoilt, const char* 
     fprintf(file, "----------------------------------------\n");
     fprintf(file, "ELECTION STATUS: %s\n", winnerText);
     fprintf(file, "========================================\n");
-    
-    fflush(file); 
+    fflush(file);
     fclose(file);
 }
 void openNotepad() {
